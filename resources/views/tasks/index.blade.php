@@ -1,42 +1,46 @@
 @extends('layouts.app')
  
 @section('content')
- 
-    <div class="panel-body">
-        <!-- Display Validation Errors -->
-        @include('common.errors')
- 
-        <!-- New Task Form -->
-        <form action="{{ url('task') }}" method="POST" class="form-horizontal">
-            {{ csrf_field() }}
- 
-            <!-- Task Name -->
-            <div class="form-group">
-                <label for="task-name" class="col-sm-3 control-label">Task</label>
- 
-                <div class="col-sm-6">
-                    <input type="text" name="name" id="task-name" class="form-control">
+<div class="d-flex flex-column">
+    <div style="width: 85%" class="card my-2 align-self-center">
+        <div class="card-header">
+            New Task
+        </div>
+        <div class="card-body">
+            <!-- Display Validation Errors -->
+            @include('common.errors')
+    
+            <!-- New Task Form -->
+            <form action="{{ url('task') }}" method="POST" class="form-horizontal">
+                {{ csrf_field() }}
+    
+                <!-- Task Name -->
+                <div class="form-group mb-2">
+                    <label for="task-name" class="col-sm-3 form-label">Task</label>
+    
+                    <div class="col-sm-6">
+                        <input type="text" name="name" id="task-name" class="form-control">
+                    </div>
                 </div>
-            </div>
- 
-            <!-- Add Task Button -->
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-default">
-                        <i class="fa fa-plus"></i> Add Task
-                    </button>
+    
+                <!-- Add Task Button -->
+                <div class="form-group mb-2">
+                    <div class="col-sm-offset-3 col-sm-6">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-plus"></i> Add Task
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
- 
     @if (count($tasks) > 0)
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div style="width: 85%" class="card my-2 align-self-center">
+            <div class="card-header">
                 Current Tasks
             </div>
  
-            <div class="panel-body">
+            <div class="card-body">
                 <table class="table table-striped task-table">
  
                     <!-- Table Headings -->
@@ -55,12 +59,12 @@
                                 </td>
  
                                 <td>
-                                    <form action="{{ url('task/'.$task->id) }}" method="POST">
+                                    <form class="d-flex justify-content-end" action="{{ url('task/'.$task->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                              
                                         <button type="submit" id="delete-task-{{ $task->id }}" class="btn btn-danger">
-                                            <i class="fa fa-btn fa-trash"></i>Delete
+                                            <i class="fa fa-trash"></i> Delete
                                         </button>
                                     </form>
                                 </td>
@@ -71,4 +75,5 @@
             </div>
         </div>
     @endif
+</div>
 @endsection
